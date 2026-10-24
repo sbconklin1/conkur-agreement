@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Agreement Link Builder</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  :root { --bg:#fff; --ink:#16181d; --muted:#5d6472; --accent:#1f4fd8; --fill:#eef3ff; --fill-line:#9db3f0; color-scheme: light; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 "IBM Plex Sans", system-ui, sans-serif; }
+  .wrap { max-width:560px; margin:0 auto; padding:40px max(16px, env(safe-area-inset-right,0px)) 60px max(16px, env(safe-area-inset-left,0px)); display:grid; gap:16px; }
+  .brand { font-weight:600; letter-spacing:.08em; text-transform:uppercase; font-size:13px; color:var(--accent); }
+  h1 { font-size:26px; margin:0; }
+  p { margin:0; color:var(--muted); }
+  label { display:grid; gap:6px; font-size:14px; font-weight:500; }
+  input { font:16px inherit; font-family:inherit; color:var(--ink); background:var(--fill); border:1.5px solid var(--fill-line); border-radius:6px; padding:10px 12px; width:100%; }
+  input:focus { outline:2px solid var(--accent); outline-offset:1px; }
+  .out { font:14px/1.4 ui-monospace, Menlo, monospace; word-break:break-all; background:#f4f5f7; border-radius:6px; padding:12px; min-height:48px; }
+  button { font:600 16px inherit; font-family:inherit; color:#fff; background:var(--accent); border:0; border-radius:6px; padding:12px 18px; cursor:pointer; justify-self:start; }
+  button:focus-visible { outline:3px solid var(--ink); outline-offset:2px; }
+  .ok { color:#147a3d; font-size:14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">Conkur Media</div>
+  <h1>Make a client signing link</h1>
+  <p>Fill in the deal, copy the link, text it to the client. Price, start date, guarantee and payment method are locked on their end.</p>
+  <label for="business">Client business name<input id="business" placeholder="Sammy's Detailing"></label>
+  <label for="client_name">Client name<input id="client_name" placeholder="Sammy Smith"></label>
+  <label for="client_email">Client email (optional)<input id="client_email" type="email" placeholder="sammy@email.com"></label>
+  <label for="start_date">Start date<input id="start_date" type="date"></label>
+  <label for="fee">Monthly fee ($)<input id="fee" type="number" inputmode="numeric" placeholder="1450"></label>
+  <label for="lead_target">Guarantee: leads in 90 days<input id="lead_target" type="number" inputmode="numeric" placeholder="15"></label>
+  <label for="payment_method">Payment method<input id="payment_method" placeholder="Zelle to 805-558-5138"></label>
+  <div class="out" id="out" aria-live="polite"></div>
+  <button id="copy" type="button">Copy link</button>
+  <span class="ok" id="ok" hidden>Copied</span>
+</div>
+<script>
+  const keys = ["business","client_name","client_email","start_date","fee","lead_target","payment_method"];
+  const base = new URL("./", location.href).href;
+  function build() {
+    const p = new URLSearchParams();
+    keys.forEach(function (k) { const v = document.getElementById(k).value.trim(); if (v) p.set(k, v); });
+    const q = p.toString();
+    const url = base + (q ? "?" + q : "");
+    document.getElementById("out").textContent = url;
+    return url;
+  }
+  keys.forEach(function (k) { document.getElementById(k).addEventListener("input", build); });
+  build();
+  document.getElementById("copy").addEventListener("click", function () {
+    const url = build();
+    const ok = document.getElementById("ok");
+    navigator.clipboard.writeText(url).then(function () { ok.hidden = false; setTimeout(function () { ok.hidden = true; }, 2000); })
+      .catch(function () { const r = document.createRange(); r.selectNodeContents(document.getElementById("out")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); });
+  });
+</script>
+</body>
+</html>
