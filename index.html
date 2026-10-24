@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Conkur Media Client Agreement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@400;600&family=Caveat:wght@600&display=swap">
+<style>
+  /* Layout: one reading column, contract text in serif, fill-in fields tinted blue, signing panel at the end */
+  :root {
+    --bg: #ffffff;
+    --ink: #16181d;
+    --muted: #5d6472;
+    --line: #e3e6ec;
+    --accent: #1f4fd8;
+    --fill: #eef3ff;
+    --fill-line: #9db3f0;
+    --set: #f4f5f7;
+    --error: #b42318;
+    --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --serif: "IBM Plex Serif", Georgia, "Times New Roman", serif;
+    --script: "Caveat", "Brush Script MT", cursive;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--bg); }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--serif); }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 40px max(16px, env(safe-area-inset-right, 0px)) 80px max(16px, env(safe-area-inset-left, 0px)); }
+  header { font-family: var(--sans); border-bottom: 2px solid var(--ink); padding-bottom: 20px; margin-bottom: 28px; }
+  .brand { font-weight: 600; letter-spacing: .08em; text-transform: uppercase; font-size: 13px; color: var(--accent); }
+  h1 { font-family: var(--sans); font-weight: 600; font-size: 30px; line-height: 1.2; margin: 6px 0 8px; text-wrap: balance; }
+  .intro { color: var(--muted); font-family: var(--sans); font-size: 15px; margin: 0; }
+  h2 { font-family: var(--sans); font-size: 17px; font-weight: 600; margin: 32px 0 8px; }
+  p, li { max-width: 65ch; }
+  ul { padding-left: 22px; margin: 8px 0; }
+  li { margin: 4px 0; }
+  .field {
+    font: inherit; color: var(--ink); background: var(--fill);
+    border: 0; border-bottom: 1.5px dashed var(--fill-line); border-radius: 4px 4px 0 0;
+    padding: 1px 6px; min-width: 9ch; max-width: 100%;
+  }
+  .field::placeholder { color: #7a8bbd; font-style: italic; }
+  .field:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .field[readonly] { background: var(--set); border-bottom: 1.5px solid var(--line); }
+  .field.w-l { width: 22ch; } .field.w-m { width: 14ch; } .field.w-s { width: 8ch; }
+  .field:invalid.touched { border-bottom-color: var(--error); }
+  .sign {
+    margin-top: 40px; border: 1.5px solid var(--ink); border-radius: 8px; padding: 24px;
+    font-family: var(--sans); display: grid; gap: 16px;
+  }
+  .sign h2 { margin: 0; }
+  .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  label { display: grid; gap: 6px; font-size: 14px; font-weight: 500; }
+  .hint { font-weight: 400; color: var(--muted); font-size: 13px; }
+  .input {
+    font: 16px var(--sans); color: var(--ink); background: var(--fill);
+    border: 1.5px solid var(--fill-line); border-radius: 6px; padding: 10px 12px; width: 100%;
+  }
+  .input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .sigpreview { font: 34px/1.1 var(--script); color: var(--accent); min-height: 44px; border-bottom: 1.5px solid var(--ink); padding: 4px 2px; }
+  .check { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; font-size: 15px; }
+  .check input { width: 20px; height: 20px; margin-top: 3px; accent-color: var(--accent); flex: none; }
+  button {
+    font: 600 16px var(--sans); color: #fff; background: var(--accent); border: 0; border-radius: 6px;
+    padding: 14px 20px; cursor: pointer; justify-self: start;
+  }
+  button:hover { filter: brightness(1.08); }
+  button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+  button[disabled] { opacity: .6; cursor: wait; }
+  .error { color: var(--error); font-size: 14px; margin: 0; }
+  .small { color: var(--muted); font-size: 13px; font-family: var(--sans); margin: 0; }
+  .provider { display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; font-family: var(--sans); font-size: 15px; }
+  .provider dt { color: var(--muted); } .provider dd { margin: 0; }
+  @media (max-width: 480px) { h1 { font-size: 25px; } .sign { padding: 18px; } .field.w-l { width: 100%; } }
+  @media (prefers-reduced-motion: no-preference) { button { transition: filter .15s; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+<form id="form" method="POST" novalidate>
+  <header>
+    <div class="brand">Conkur Media</div>
+    <h1>Client Agreement</h1>
+    <p class="intro">Fill in the highlighted blanks, read the terms, then sign at the bottom. A signed copy is emailed to you and to Conkur Media.</p>
+  </header>
+
+  <article id="agreement">
+    <h2>1. Parties and services</h2>
+    <p>This agreement is between Conkur Media, run by Sefton Conklin ("Conkur Media"), and
+      <input class="field w-l" name="business" id="business" placeholder="your business name" required autocomplete="organization">,
+      represented by
+      <input class="field w-l" name="client_name" id="client_name" placeholder="your full name" required autocomplete="name">
+      ("Client"). It starts on
+      <input class="field w-m" type="date" name="start_date" id="start_date" required>.</p>
+    <p>Each month, Conkur Media will provide:</p>
+    <ul>
+      <li>12 short-form videos, filmed in person, edited, and posted to the Client's Instagram, TikTok, Facebook and YouTube</li>
+      <li>1 to 2 filming sessions per month, about 2 to 3 hours each, at a location that works for the Client, plus short voiceover recordings that can be done by phone</li>
+      <li>A one-time profile makeover in the first month: bio, profile photo, highlights, pinned posts and booking link</li>
+      <li>Booking automations, so anyone who comments a keyword or sends a DM gets the Client's booking link automatically</li>
+      <li>A monthly recap of views, engagement, and leads from social</li>
+    </ul>
+    <p>Paid ads: if the Client wants to boost a post, ad spend is paid by the Client directly to the ad platform.</p>
+
+    <h2>2. Fees and payment</h2>
+    <ul>
+      <li>Monthly fee: $<input class="field w-s" type="number" min="0" step="1" inputmode="numeric" name="fee" id="fee" placeholder="amount" required>, due on the 1st of each month, paid in advance for that month.</li>
+      <li>The first payment is due before the first filming session. No content is filmed until it's received.</li>
+      <li>Payment can be made by <input class="field w-l" name="payment_method" id="payment_method" placeholder="Zelle, Venmo, or invoice link" required>.</li>
+      <li>If a payment is more than 7 days late, Conkur Media may pause posting until it's paid.</li>
+    </ul>
+
+    <h2>3. Term and cancellation</h2>
+    <ul>
+      <li>This agreement is month to month. There is no long-term commitment.</li>
+      <li>Either side can cancel at any time by text or email. To avoid being billed for the next month, cancel before the 1st of that month.</li>
+      <li>Payments already made are not refunded, but no further payments are owed after cancellation.</li>
+    </ul>
+
+    <h2>4. Client responsibilities</h2>
+    <p>The Client agrees to:</p>
+    <ul>
+      <li>Be available for 1 to 2 filming sessions per month, about 2 to 3 hours each, and record short voiceovers when asked</li>
+      <li>Respond to leads within 1 hour during business hours (DMs, calls and booking requests from social)</li>
+      <li>Provide login access or admin access to the social accounts being managed</li>
+      <li>Review and approve anything that needs approval (like pricing or offers shown in videos) within 48 hours</li>
+      <li>Make sure anyone filmed at the business, including staff and customers, is okay being on camera</li>
+    </ul>
+    <p>If a filming session is missed or canceled with less than 24 hours' notice, that month's videos may be reduced.</p>
+
+    <h2>5. Results guarantee</h2>
+    <p>If the Client does not get at least
+      <input class="field w-s" type="number" min="1" step="1" inputmode="numeric" name="lead_target" id="lead_target" placeholder="number" required>
+      new leads from social media within the first 90 days in a row of service, Conkur Media will keep providing the services in Section 1 at no charge, for up to 2 additional months, until the Client reaches that number.</p>
+    <p>During free months, the Client pays nothing. Regular billing resumes on the 1st of the month after the number is reached. There is no back pay for free months. If the number still isn't reached after 2 free months, the Client may cancel with nothing further owed.</p>
+    <p>What counts as a lead: a new person who reaches out through social media asking about the Client's services. That includes a DM, a comment with the booking keyword, a booking request through the profile link, or a call where they say they found the Client on social. Leads are tracked through the booking automations and the DM inbox.</p>
+    <p>The guarantee only applies if the Client:</p>
+    <ul>
+      <li>Stays with Conkur Media for the first 90 days in a row, without canceling or pausing</li>
+      <li>Keeps all payments current</li>
+      <li>Shows up for scheduled filming sessions and voiceover recordings</li>
+      <li>Responds to leads within 1 hour during business hours, as listed in Section 4</li>
+    </ul>
+    <p>The guarantee covers new leads only. Conkur Media does not promise a specific number of views, followers, sales, or revenue.</p>
+
+    <h2>6. Content ownership and other terms</h2>
+    <ul>
+      <li>Ownership: once paid for, the Client owns all final videos and can keep using them after the agreement ends.</li>
+      <li>Portfolio use: Conkur Media may share the Client's videos and results in its own portfolio and marketing, unless the Client asks in writing not to.</li>
+      <li>Account access: the Client keeps full ownership of all social accounts. When the agreement ends, Conkur Media will return or remove its access.</li>
+      <li>Platform changes: Conkur Media isn't responsible for changes to social media algorithms, account restrictions, or outages outside its control.</li>
+      <li>Confidentiality: both sides will keep each other's business details, logins and pricing private.</li>
+      <li>Independent contractor: Conkur Media is an independent contractor, not an employee of the Client.</li>
+      <li>Governing law: this agreement is governed by the laws of the State of California.</li>
+    </ul>
+
+    <h2>7. Conkur Media</h2>
+    <dl class="provider">
+      <dt>Name</dt><dd>Sefton Conklin</dd>
+      <dt>Business</dt><dd>Conkur Media</dd>
+      <dt>Email</dt><dd>seftonconklin@gmail.com</dd>
+      <dt>Phone</dt><dd>805-558-5138</dd>
+    </dl>
+  </article>
+
+  <section class="sign" aria-labelledby="sign-h">
+    <h2 id="sign-h">Sign as the Client</h2>
+    <div class="row">
+      <label for="client_email">Your email <span class="hint">Your signed copy goes here</span>
+        <input class="input" type="email" name="client_email" id="client_email" placeholder="you@business.com" required autocomplete="email">
+      </label>
+      <label for="client_phone">Your phone <span class="hint">Optional</span>
+        <input class="input" type="tel" name="client_phone" id="client_phone" placeholder="(805) 555-0123" autocomplete="tel">
+      </label>
+    </div>
+    <label for="signature">Type your full name to sign
+      <input class="input" name="signature" id="signature" placeholder="your full legal name" required autocomplete="name">
+    </label>
+    <div class="sigpreview" id="sigpreview" aria-hidden="true"></div>
+    <label class="check" for="agree">
+      <input type="checkbox" id="agree" name="agree" value="Yes" required>
+      <span>I have read this agreement and agree to its terms. I understand that typing my name above is my electronic signature.</span>
+    </label>
+    <p class="error" id="error" hidden></p>
+    <button type="submit" id="submit">Sign agreement</button>
+    <p class="small">Signed on <span id="today"></span>.</p>
+  </section>
+
+  <input type="hidden" name="signed_on" id="signed_on">
+  <input type="hidden" name="agreement_text" id="agreement_text">
+  <input type="hidden" name="_cc" id="_cc">
+  <input type="hidden" name="_subject" id="_subject" value="Signed agreement: Conkur Media">
+  <input type="hidden" name="_template" value="box">
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_next" id="_next">
+  <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+</form>
+</div>
+<script>
+  const OWNER_EMAIL = "seftonconklin@gmail.com";
+  const form = document.getElementById("form");
+  form.action = "https://formsubmit.co/" + OWNER_EMAIL;
+
+  const now = new Date();
+  const todayText = now.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+  document.getElementById("today").textContent = todayText;
+
+  // Prefill from the link Sefton sends, e.g. ?business=...&fee=1450&lead_target=15&start_date=2026-11-01
+  const params = new URLSearchParams(location.search);
+  ["business", "client_name", "start_date", "fee", "payment_method", "lead_target", "client_email"].forEach(function (key) {
+    const v = params.get(key);
+    const el = document.getElementById(key);
+    if (v && el) {
+      el.value = v;
+      if (["fee", "lead_target", "start_date", "payment_method"].includes(key)) el.readOnly = true;
+    }
+  });
+
+  // Size inline blanks to their content
+  function fit(el) {
+    if (el.type === "date") return;
+    const len = Math.max((el.value || el.placeholder || "").length, 4);
+    el.style.width = "min(100%, " + (len + 3) + "ch)";
+  }
+  document.querySelectorAll(".field").forEach(function (el) { fit(el); el.addEventListener("input", function () { fit(el); }); });
+
+  const sig = document.getElementById("signature");
+  const preview = document.getElementById("sigpreview");
+  sig.addEventListener("input", function () { preview.textContent = sig.value; });
+
+  function agreementText() {
+    const clone = document.getElementById("agreement").cloneNode(true);
+    clone.querySelectorAll("input").forEach(function (inp) {
+      const real = document.getElementById(inp.id);
+      let v = real ? real.value : inp.value;
+      if (inp.type === "date" && v) {
+        const d = new Date(v + "T12:00:00");
+        v = d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+      }
+      inp.replaceWith(document.createTextNode(v || "________"));
+    });
+    const lines = [];
+    clone.querySelectorAll("h2, p, li, dt, dd").forEach(function (n) {
+      const t = n.textContent.replace(/\s+/g, " ").trim();
+      if (!t) return;
+      if (n.tagName === "H2") lines.push("", t.toUpperCase());
+      else if (n.tagName === "LI") lines.push("- " + t);
+      else lines.push(t);
+    });
+    return lines.join("\n").trim();
+  }
+
+  form.addEventListener("submit", function (e) {
+    const err = document.getElementById("error");
+    const required = Array.from(form.querySelectorAll("[required]"));
+    const missing = required.filter(function (el) { el.classList.add("touched"); return !el.checkValidity(); });
+    if (missing.length) {
+      e.preventDefault();
+      err.textContent = "Fill in every highlighted blank, add your email, type your name and check the box to sign.";
+      err.hidden = false;
+      missing[0].focus();
+      return;
+    }
+    err.hidden = true;
+    const business = document.getElementById("business").value.trim();
+    const clientEmail = document.getElementById("client_email").value.trim();
+    document.getElementById("signed_on").value = now.toLocaleString("en-US");
+    document.getElementById("_cc").value = clientEmail;
+    document.getElementById("_subject").value = "Signed agreement: Conkur Media and " + business;
+    document.getElementById("agreement_text").value = agreementText() +
+      "\n\nSIGNED BY CLIENT\n" + sig.value.trim() + " (" + clientEmail + ")\n" + now.toLocaleString("en-US");
+    document.getElementById("_next").value = new URL("thanks.html", location.href).href;
+    const btn = document.getElementById("submit");
+    btn.disabled = true;
+    btn.textContent = "Signing...";
+  });
+</script>
+</body>
+</html>
