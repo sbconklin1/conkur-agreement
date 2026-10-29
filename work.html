@@ -32,7 +32,8 @@
   figcaption { font-size:14px; color:var(--muted); margin-top:8px; }
   .videos { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:16px; }
   .video { border:1px solid var(--line); border-radius:12px; overflow:hidden; background:#fff; }
-  .video iframe { display:block; width:100%; height:560px; border:0; }
+  .clip { position:relative; overflow:hidden; padding-bottom:calc(125% + 54px); }
+  .clip iframe { position:absolute; top:0; left:0; display:block; width:100%; height:900px; border:0; }
   .video .views { display:flex; justify-content:space-between; align-items:center; padding:10px 14px; border-top:1px solid var(--line); font-size:14px; }
   .video .views b { font-size:16px; }
   .video .views a { color:var(--accent); text-decoration:none; font-weight:500; }
@@ -88,15 +89,15 @@
     </div>
     <div class="videos">
       <div class="video">
-        <iframe src="https://www.instagram.com/reel/DdxM87aPv7p/embed/" title="Rancho Calabaza reel, 19.5k views" loading="lazy" allowtransparency="true" scrolling="no"></iframe>
+        <div class="clip"><iframe src="https://www.instagram.com/reel/DdxM87aPv7p/embed/" title="Rancho Calabaza reel, 19.5k views" loading="lazy" allowtransparency="true" scrolling="no"></iframe></div>
         <div class="views"><b>19.5k views</b><a href="https://www.instagram.com/reel/DdxM87aPv7p/" target="_blank" rel="noopener">Open in Instagram</a></div>
       </div>
       <div class="video">
-        <iframe src="https://www.instagram.com/reel/Ddy04cdR39X/embed/" title="Rancho Calabaza reel, 2.7k views" loading="lazy" allowtransparency="true" scrolling="no"></iframe>
+        <div class="clip"><iframe src="https://www.instagram.com/reel/Ddy04cdR39X/embed/" title="Rancho Calabaza reel, 2.7k views" loading="lazy" allowtransparency="true" scrolling="no"></iframe></div>
         <div class="views"><b>2.7k views</b><a href="https://www.instagram.com/reel/Ddy04cdR39X/" target="_blank" rel="noopener">Open in Instagram</a></div>
       </div>
       <div class="video">
-        <iframe src="https://www.instagram.com/reel/DeZUYtuRbul/embed/" title="Rancho Calabaza reel, 1.5k views" loading="lazy" allowtransparency="true" scrolling="no"></iframe>
+        <div class="clip"><iframe src="https://www.instagram.com/reel/DeZUYtuRbul/embed/" title="Rancho Calabaza reel, 1.5k views" loading="lazy" allowtransparency="true" scrolling="no"></iframe></div>
         <div class="views"><b>1.5k views</b><a href="https://www.instagram.com/reel/DeZUYtuRbul/" target="_blank" rel="noopener">Open in Instagram</a></div>
       </div>
     </div>
@@ -108,7 +109,7 @@
     <p class="story">One video, <strong>1.1 million views</strong>.</p>
     <div class="videos">
       <div class="video solo">
-        <iframe src="https://www.instagram.com/reel/DP2ct5biZxP/embed/" title="The Produce Guys reel, 1.1M views" loading="lazy" allowtransparency="true" scrolling="no"></iframe>
+        <div class="clip"><iframe src="https://www.instagram.com/reel/DP2ct5biZxP/embed/" title="The Produce Guys reel, 1.1M views" loading="lazy" allowtransparency="true" scrolling="no"></iframe></div>
         <div class="views"><b>1.1M views</b><a href="https://www.instagram.com/reel/DP2ct5biZxP/" target="_blank" rel="noopener">Open in Instagram</a></div>
       </div>
     </div>
