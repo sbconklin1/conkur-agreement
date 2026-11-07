@@ -322,14 +322,15 @@
     try {
       const ctl = new AbortController();
       const timer = setTimeout(function () { ctl.abort(); }, 12000);
-      const res = await fetch("https://formsubmit.co/ajax/" + OWNER_EMAIL, {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify({
-          _subject: subject, _cc: clientEmail, _template: "box", _captcha: "false",
+          access_key: "d1dde3f4-e935-4464-b8f0-c190b05897ff", subject: subject,
+          from_name: business, email: clientEmail, replyto: clientEmail,
           business: business, client_name: val("client_name"), client_email: clientEmail,
           client_phone: val("client_phone"), signature: sig.value.trim(), signed_on: signedAt,
-          agreement_text: fullText
+          message: fullText
         }),
         signal: ctl.signal
       });
@@ -352,7 +353,9 @@
       "&subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(fullText);
     const status = document.getElementById("status");
     if (emailed) {
-      status.textContent = "A signed copy was emailed to you and to Conkur Media. Check your spam folder if you don't see it.";
+      status.textContent = "Your signed agreement was sent to Conkur Media. Tap Email me a copy to keep one for your records.";
+      mail.href = "mailto:" + encodeURIComponent(clientEmail) + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(fullText);
+      mail.textContent = "Email me a copy";
     } else {
       status.className = "status warn";
       status.textContent = "One last step: tap Send signed copy below so we both have it on file.";
